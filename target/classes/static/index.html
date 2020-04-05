@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Service</title>
+    <style type="text/css">
+    .comments {
+     width:100%;/*自动适应父布局宽度*/
+     overflow:auto;
+     word-break:break-all;
+    }
+    .submit {
+        width: 80px;
+        height: 35px;
+        /* font-size: 10px; */
+    }
+    </style>    
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>API Name: </td> 
+            <td><input type="text" size="35" id="api"></td>
+        </tr>
+        <tr>
+            <td>JSON Data: </td> 
+            <td><textarea class="comments" rows="28" cols="30" id="text"></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button class="submit" id="btn">Submit</button> &nbsp; <button class="submit" id="cancel">Clean</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><p id="t3">1111111111</p></td>
+        </tr>
+    </table>
+
+    <script>
+        var cancel = document.getElementById("cancel");
+        var text = document.getElementById("text");
+        var api = document.getElementById("api");
+        cancel.onclick = function(){
+            text.value = "";
+            // console.log(api.value);
+        }
+    </script>
+
+    <script>
+        $('#btn').on('click',function () {
+            var api = document.getElementById('api').value;
+            var text = document.getElementById('text').value;
+            // console.log(text);
+            // console.log(api);
+            $.ajax({
+                url:'http://127.0.0.1:8090/api/v1/json/data',
+                type:'post',
+                // data:JSON.stringify(text),
+                data:text,
+                headers: {
+                     "Content-Type":"application/json; charset=utf8",
+                     "API-Name": api //自定义的请求头,后端servlet通过request.getHeader("API-Name")来获取名字;
+                },
+                success:function (data) {
+                    $('#t3').val(data)
+                    {alert(data)}
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>
