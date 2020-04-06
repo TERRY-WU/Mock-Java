@@ -62,7 +62,11 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/get/{name}", method = RequestMethod.GET)
     @ApiOperation(value = "通过文件名获取自定义的JSON数据", httpMethod = "GET")
-    public String returnJSONGet(@PathVariable(value = "name", required = true) String apiName) throws IOException {
+    public String returnJSONGet(@PathVariable(value = "name", required = false) String apiName) throws IOException {
+
+        if(apiName == null){
+            return "{Status:}";
+        }
         System.out.println("传过来的文件名:" + apiName);
 //        System.out.println(System.getProperties().getProperty("os.name"));
         String projectPath = System.getProperty("user.dir");
@@ -83,7 +87,7 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/post/{name}", method = RequestMethod.POST)
     @ApiOperation(value = "通过文件名获取自定义的JSON数据", httpMethod = "POST")
-    public String returnJSONPost(@PathVariable(value = "name", required = true) String apiName) throws IOException {
+    public String returnJSONPost(@PathVariable(value = "name", required = false) String apiName) throws IOException {
         return returnJSONGet(apiName);
     }
 

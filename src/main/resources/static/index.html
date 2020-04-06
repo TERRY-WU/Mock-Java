@@ -21,20 +21,34 @@
     <table>
         <tr>
             <td>API Name: </td> 
-            <td><input type="text" size="35" id="api"></td>
+            <td><input type="text" size="50" id="api"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>JSON Data: </td> 
-            <td><textarea class="comments" rows="28" cols="30" id="text"></textarea></td>
+            <td><textarea class="comments" rows="38" cols="50" id="text"></textarea></td>
+            <td></td>
+            <td></td>
+            <td>Data from Server: </td>
+            <td><textarea class="comments" rows="38" cols="50" id="text-srv"></textarea></td>
         </tr>
         <tr>
             <td></td>
-            <td><button class="submit" id="btn">Submit</button> &nbsp; <button class="submit" id="cancel">Clean</button></td>
-        </tr>
-        <tr>
+            <td>
+                <button class="submit" id="btn">Submit</button> &nbsp; 
+                <button class="submit" id="cancel">Clean</button> &nbsp; 
+                <button class="submit" id="get">Get</button> &nbsp; 
+                <button class="submit" id="post">Post</button>
+            </td>
             <td></td>
-            <td><textarea id="t3"></textarea></td>
+            <td></td>
         </tr>
+      
     </table>
 
     <script>
@@ -64,11 +78,66 @@
                 },
                 success:function (data) {
                     var res = JSON.stringify(data)
-                    $('#t3').val(res)
-                    {alert(res)}
+                    // $('#t3').val(res)
+                    alert(res)
                 }
             })
         })
     </script>
+
+    <script>
+        $('#get').on('click',function () {
+            var apiValue = document.getElementById("api").value;
+            var textSrv = document.getElementById("text-srv").value;
+            var api = apiValue.trim();
+            if (typeof(api)=="undefined" || api=='' || api==null || api.length==0){
+                api="example";
+                }
+            console.log(api);
+            console.log(textSrv);
+            $.ajax({
+                headers: {
+                     "Content-Type":"application/json; charset=utf8",
+                },
+                url:'http://127.0.0.1:8090/api/v1/json/get/' + api,
+                type:'get',
+                // data:{name:'test001'},
+                dataType:'json',
+                success:function (res) {
+                    var result = JSON.stringify(res)
+                    $('#text-srv').val()
+                    $('#text-srv').val(result)
+                }
+            })
+        })
+    </script>
+
+    <script>
+        $('#post').on('click',function () {
+            var apiValue = document.getElementById("api").value;
+            var textSrv = document.getElementById("text-srv").value;
+            var api = apiValue.trim();
+            if (typeof(api)=="undefined" || api=='' || api==null || api.length==0){
+                api="example";
+                }
+            console.log(api);
+            console.log(textSrv);
+            $.ajax({
+                headers: {
+                    "Content-Type":"application/json; charset=utf8",
+                },
+                url:'http://127.0.0.1:8090/api/v1/json/post/' + api,
+                data:{"id":1},
+                type:'post',
+                dataType:'json',
+                success:function (res) {
+                    var result = JSON.stringify(res)
+                    $('#text-srv').val()
+                    $('#text-srv').val(result)
+                }
+            })
+        })
+    </script>
+
 </body>
 </html>
