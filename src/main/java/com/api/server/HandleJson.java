@@ -83,7 +83,7 @@ public class HandleJson {
                 }
             }
         }
-        return "{\"res\": \"No data found...!\"}";
+        return "{\"res\": \"No data found...did you enter a correct name? \"}";
     }
 
     @RequestMapping(value = "/json/post/{name}", method = RequestMethod.POST)

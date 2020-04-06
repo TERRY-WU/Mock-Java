@@ -80,8 +80,8 @@
             // console.log(text);
             // console.log(api);
             $.ajax({
-                url:'http://localhost:8090/api/v1/json/data',
-                // url:'http://192.168.88.2:8090/api/v1/json/data',
+                // url:'http://localhost:8090/api/v1/json/data',
+                url:'http://192.168.88.2:8090/api/v1/json/data',
                 type:'post',
                 // data:JSON.stringify(text),
                 data:text,
@@ -114,8 +114,8 @@
                 headers: {
                      "Content-Type":"application/json; charset=utf8",
                 },
-                url:'http://localhost:8090/api/v1/json/get/' + api,
-                // url:'http://192.168.88.2:8090/api/v1/json/get/' + api,
+                // url:'http://localhost:8090/api/v1/json/get/' + api,
+                url:'http://192.168.88.2:8090/api/v1/json/get/' + api,
                 type:'get',
                 // data:{name:'test001'},
                 dataType:'json',
@@ -146,8 +146,8 @@
                     headers: {
                         "Content-Type":"application/json; charset=utf8",
                     },
-                    url:'http://localhost:8090/api/v1/json/post/' + api,
-                    // url:'http://192.168.88.2:8090/api/v1/json/post/' + api,
+                    // url:'http://localhost:8090/api/v1/json/post/' + api,
+                    url:'http://192.168.88.2:8090/api/v1/json/post/' + api,
                     // data:{"id":1},
                     type:'post',
                     dataType:'json',
