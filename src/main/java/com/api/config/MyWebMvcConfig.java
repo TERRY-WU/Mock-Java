@@ -13,6 +13,6 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .maxAge(1800)
-                .allowedOrigins("*");
+                .allowedOrigins("*", "http://localhost:8090");
     }
 }

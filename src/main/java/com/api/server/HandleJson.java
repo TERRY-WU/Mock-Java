@@ -64,13 +64,12 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/get/{name}", method = RequestMethod.GET)
     @ApiOperation(value = "通过文件名获取自定义的JSON数据", httpMethod = "GET")
-    public String returnJSONGet(@PathVariable(value = "name", required = false) String apiName, HttpServletResponse response) throws IOException {
+    public String returnJSONGet(@PathVariable(value = "name", required = false) String apiName) throws IOException {
 
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Credential","true");
-        if(apiName == null){
-            return "{Status: Name can't be null~!}";
+        if (apiName.trim().isEmpty()) {
+            return "The API name should not be empty...!";
         }
+
         System.out.println("传过来的文件名:" + apiName);
 //        System.out.println(System.getProperties().getProperty("os.name"));
         String projectPath = System.getProperty("user.dir");
@@ -91,8 +90,8 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/post/{name}", method = RequestMethod.POST)
     @ApiOperation(value = "通过文件名获取自定义的JSON数据", httpMethod = "POST")
-    public String returnJSONPost(@PathVariable(value = "name", required = false) String apiName, HttpServletResponse response) throws IOException {
-        return returnJSONGet(apiName, response);
+    public String returnJSONPost(@PathVariable(value = "name", required = false) String apiName) throws IOException {
+        return returnJSONGet(apiName);
     }
 
     /**
