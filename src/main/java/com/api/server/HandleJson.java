@@ -23,7 +23,7 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/data", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ApiOperation(value = "上传想要返回的Json格式接口", httpMethod = "POST")
-    public String createJson(HttpServletRequest request, @RequestBody(required = false) String jsonString) throws IOException {
+    public String createJson(HttpServletRequest request, @RequestBody(required = false) String jsonString, HttpServletResponse response) throws IOException {
 
         String apiName = request.getHeader("API-Name");
 
@@ -57,15 +57,19 @@ public class HandleJson {
 
         FileUtils.writeStringToFile(new File(filePath), jsonString);
         System.out.println(jsonString);
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Credential","true");
         return jsonString;
     }
 
     @RequestMapping(value = "/json/get/{name}", method = RequestMethod.GET)
     @ApiOperation(value = "通过文件名获取自定义的JSON数据", httpMethod = "GET")
-    public String returnJSONGet(@PathVariable(value = "name", required = false) String apiName) throws IOException {
+    public String returnJSONGet(@PathVariable(value = "name", required = false) String apiName, HttpServletResponse response) throws IOException {
 
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Credential","true");
         if(apiName == null){
-            return "{Status:}";
+            return "{Status: Name can't be null~!}";
         }
         System.out.println("传过来的文件名:" + apiName);
 //        System.out.println(System.getProperties().getProperty("os.name"));
@@ -87,8 +91,8 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/post/{name}", method = RequestMethod.POST)
     @ApiOperation(value = "通过文件名获取自定义的JSON数据", httpMethod = "POST")
-    public String returnJSONPost(@PathVariable(value = "name", required = false) String apiName) throws IOException {
-        return returnJSONGet(apiName);
+    public String returnJSONPost(@PathVariable(value = "name", required = false) String apiName, HttpServletResponse response) throws IOException {
+        return returnJSONGet(apiName, response);
     }
 
     /**

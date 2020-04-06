@@ -68,7 +68,8 @@
             // console.log(text);
             // console.log(api);
             $.ajax({
-                url:'http://127.0.0.1:8090/api/v1/json/data',
+                // url:'http://127.0.0.1:8090/api/v1/json/data',
+                url:'http://192.168.88.12:8090/api/v1/json/data',
                 type:'post',
                 // data:JSON.stringify(text),
                 data:text,
@@ -99,7 +100,8 @@
                 headers: {
                      "Content-Type":"application/json; charset=utf8",
                 },
-                url:'http://127.0.0.1:8090/api/v1/json/get/' + api,
+                // url:'http://127.0.0.1:8090/api/v1/json/get/' + api,
+                url:'http://192.168.88.12:8090/api/v1/json/get/' + api,
                 type:'get',
                 // data:{name:'test001'},
                 dataType:'json',
@@ -126,7 +128,8 @@
                 headers: {
                     "Content-Type":"application/json; charset=utf8",
                 },
-                url:'http://127.0.0.1:8090/api/v1/json/post/' + api,
+                // url:'http://127.0.0.1:8090/api/v1/json/post/' + api,
+                url:'http://192.168.88.12:8090/api/v1/json/post/' + api,
                 data:{"id":1},
                 type:'post',
                 dataType:'json',
