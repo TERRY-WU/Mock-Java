@@ -69,7 +69,6 @@
             right.value = "";
             api.value = "";
             search.value = "";
-            // console.log(api.value);
         }
     </script>
 
@@ -132,15 +131,14 @@
     <script>
         $('#post').on('click',function () {
             var search = document.getElementById("search").value;
-            var right = document.getElementById("text-right").value;
+            // var right = document.getElementById("text-right").value;
             // console.log(api);
             // console.log(right);
             var api = search.trim();
             if (typeof(api)=="undefined" || api=='' || api==null || api.length==0) {
-                // api="example";
                 alert("Search field shouldn't be empty~!");
-                api = 'example';
-                }
+                // api="example";
+            }
             else {
                 $.ajax({
                     headers: {
