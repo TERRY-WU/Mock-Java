@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@CrossOrigin(allowCredentials = "true")
+//@CrossOrigin(allowCredentials = "true")
 @RestController
 @ApiOperation(value = "/api/v1", tags = "处理前端传来的Json数据")
 @RequestMapping("/api/v1")
@@ -23,20 +23,20 @@ public class HandleJson {
 
     @RequestMapping(value = "/json/data", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ApiOperation(value = "上传想要返回的Json格式接口", httpMethod = "POST")
-    public String createJson(HttpServletRequest request, @RequestBody(required = false) String jsonString, HttpServletResponse response) throws IOException {
+    public String createJson(HttpServletRequest request, @RequestBody(required = false) String jsonString) throws IOException {
 
         String apiName = request.getHeader("API-Name");
 
         if (Objects.isNull(jsonString)) {
-            return "Hi Boss, the request body should not be empty...!";
+            return "{\"res\": \"Hi Boss, the request body should not be empty...!\"}";
         }
 
         if (apiName.trim().isEmpty()) {
-            return "The API name should not be empty...!";
+            return "{\"res\": \"The API name should not be empty...!\"}";
         }
 
         if (isSpecialChar(apiName)) {
-            return "The API name should not contain special characters...! ";
+            return "{\"res\": \"The API name should not contain special characters...!\"}";
         }
 
         String projectPath = System.getProperty("user.dir");
@@ -50,15 +50,13 @@ public class HandleJson {
                 String existedFileName = file.substring(0, file.indexOf("."));
                 System.out.println(existedFileName);
                 if (apiName.equals(existedFileName)) {
-                    return "The API name '" + apiName + "' already existed...!";
+                    return "{\"res\": \"The API name '" + apiName + "' already existed...!\"}";
                 }
             }
         }
 
         FileUtils.writeStringToFile(new File(filePath), jsonString);
         System.out.println(jsonString);
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Credential","true");
         return jsonString;
     }
 
@@ -67,7 +65,7 @@ public class HandleJson {
     public String returnJSONGet(@PathVariable(value = "name", required = false) String apiName) throws IOException {
 
         if (apiName.trim().isEmpty()) {
-            return "The API name should not be empty...!";
+            return "{\"res\": \"The API name should not be empty...!\"}";
         }
 
         System.out.println("传过来的文件名:" + apiName);
@@ -85,7 +83,7 @@ public class HandleJson {
                 }
             }
         }
-        return "No data found...!";
+        return "{\"res\": \"No data found...!\"}";
     }
 
     @RequestMapping(value = "/json/post/{name}", method = RequestMethod.POST)

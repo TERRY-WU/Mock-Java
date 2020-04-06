@@ -102,20 +102,21 @@
         $('#get').on('click',function () {
             var search = document.getElementById("search").value;
             var right = document.getElementById("text-right").value;
+            // console.log(api);
+            // console.log(right);
             var api = search.trim();
-            if (typeof(api)=="undefined" || api=='' || api==null || api.length==0){
+            if (typeof(api)=="undefined" || api=='' || api==null || api.length==0) {
                 // api="example";
                 alert("Search field shouldn't be empty~!");
                 api = 'example';
                 }
-            console.log(api);
-            console.log(right);
-            $.ajax({
+            else {
+                $.ajax({
                 headers: {
                      "Content-Type":"application/json; charset=utf8",
                 },
-                // url:'http://127.0.0.1:8090/api/v1/json/get/' + api,
-                url:'http://192.168.88.12:8090/api/v1/json/get/' + api,
+                url:'http://localhost:8090/api/v1/json/get/' + api,
+                // url:'http://192.168.88.12:8090/api/v1/json/get/' + api,
                 type:'get',
                 // data:{name:'test001'},
                 dataType:'json',
@@ -123,38 +124,41 @@
                     var result = JSON.stringify(res);
                     $('#text-right').val();
                     $('#text-right').val(result);
-                }
-            })
-        })
+                    }
+                })
+            }
+        })  
     </script>
 
     <script>
         $('#post').on('click',function () {
             var search = document.getElementById("search").value;
             var right = document.getElementById("text-right").value;
+            // console.log(api);
+            // console.log(right);
             var api = search.trim();
-            if (typeof(api)=="undefined" || api=='' || api==null || api.length==0){
+            if (typeof(api)=="undefined" || api=='' || api==null || api.length==0) {
                 // api="example";
                 alert("Search field shouldn't be empty~!");
                 api = 'example';
                 }
-            console.log(api);
-            console.log(right);
-            $.ajax({
-                headers: {
-                    "Content-Type":"application/json; charset=utf8",
-                },
-                // url:'http://127.0.0.1:8090/api/v1/json/post/' + api,
-                url:'http://192.168.88.12:8090/api/v1/json/post/' + api,
-                // data:{"id":1},
-                type:'post',
-                dataType:'json',
-                success:function (res) {
-                    var result = JSON.stringify(res);
-                    $('#text-right').val();
-                    $('#text-right').val(result);
-                }
-            })
+            else {
+                $.ajax({
+                    headers: {
+                        "Content-Type":"application/json; charset=utf8",
+                    },
+                    url:'http://localhost:8090/api/v1/json/post/' + api,
+                    // url:'http://192.168.88.12:8090/api/v1/json/post/' + api,
+                    // data:{"id":1},
+                    type:'post',
+                    dataType:'json',
+                    success:function (res) {
+                        var result = JSON.stringify(res);
+                        $('#text-right').val();
+                        $('#text-right').val(result);
+                    }
+                })
+            }
         })
     </script>
 
