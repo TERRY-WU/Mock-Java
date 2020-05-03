@@ -69,7 +69,6 @@ public class HandleJson {
         }
 
         System.out.println("传过来的文件名:" + apiName);
-//        System.out.println(System.getProperties().getProperty("os.name"));
         String projectPath = System.getProperty("user.dir");
         String filePath = projectPath + "/src/main/json/";
         String[] fileList = new File(filePath).list();
